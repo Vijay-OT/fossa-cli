@@ -48,13 +48,13 @@ execute() {
   srcdir="${tmpdir}"
   (cd "${tmpdir}" && untar "${TARBALL}")
   log_debug "setting up bindir: $BINDIR"
-  mkdir -p "$BINDIR" 2> /dev/null || echo '' | sudo -S mkdir -p "$BINDIR"
+  mkdir -p "$BINDIR" 2> /dev/null || sudo mkdir -p "$BINDIR"
   for binexe in "fossa" ; do
     if [ "$OS" = "windows" ]; then
       binexe="${binexe}.exe"
     fi
     log_debug "installing binary: $binexe"
-    cp "${srcdir}/${binexe}" "${BINDIR}/${binexe}" 2> /dev/null || echo '' | sudo -S cp "${srcdir}/${binexe}" "${BINDIR}/"
+    cp "${srcdir}/${binexe}" "${BINDIR}/${binexe}" 2> /dev/null || sudo cp "${srcdir}/${binexe}" "${BINDIR}/"
     log_info "installed ${BINDIR}/${binexe}"
   done
 }
